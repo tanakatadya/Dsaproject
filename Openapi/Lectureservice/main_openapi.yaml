@@ -1,0 +1,165 @@
+openapi: 3.0.1
+info:
+  title: Main Openapi Yaml
+  version: 0.1.0
+servers:
+- url: "{server}:{port}/"
+  variables:
+    server:
+      default: http://localhost
+    port:
+      default: "9090"
+paths:
+  /lecturer:
+    post:
+      summary: Add a new lecturer
+      operationId: postLecturer
+      requestBody:
+        description: parameter description
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Lecturer'
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lecturer'
+  /all_lecturers:
+    get:
+      summary: A resource adding lecturer details into the record
+      operationId: getAllLecturers
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lecturer'
+  /update_lecturer/{staffnum}:
+    put:
+      summary: A resource updating an existing lecturers details
+      operationId: putUpdateLecturerStaffnum
+      parameters:
+      - name: staffnum
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Lecturer'
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lecturer'
+  /lecturerId/{id}:
+    get:
+      summary: A resource retrieving a lecturer by staff number
+      operationId: getLectureridId
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lecturer'
+        "404":
+          description: NotFound
+  /remove_lecturer/{staffnumber}:
+    delete:
+      operationId: deleteRemoveLecturerStaffnumber
+      parameters:
+      - name: staffnumber
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Ok
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lecturer'
+  /lecturer_office/{officenumber}:
+    get:
+      operationId: getLecturerOfficeOfficenumber
+      parameters:
+      - name: officenumber
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lecturer'
+            text/plain:
+              schema:
+                type: string
+  /LecturerBycourseName/{courseName}:
+    get:
+      operationId: getLecturerbycoursenameCoursename
+      parameters:
+      - name: courseName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lecturer'
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    Lecturer:
+      required:
+      - staffnumber
+      type: object
+      properties:
+        staffnumber:
+          type: integer
+          format: int64
+        officenumber:
+          type: integer
+          format: int64
+        staffname:
+          type: string
+        title:
+          type: string
+        coursestaken:
+          type: string
