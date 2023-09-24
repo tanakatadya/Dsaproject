@@ -1,5 +1,4 @@
 import ballerina/http;
-
 import ballerina/io;
 
  type Lecturer readonly & record {
@@ -101,12 +100,4 @@ public function main() returns error?{
 
     io:println("\n Lecturers who take the course ",courseName , a_course1.toString());
 
- 
-
- 
-
- 
-
- 
-
-}
+ }
